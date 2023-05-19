@@ -1,4 +1,4 @@
 # Crypto
 
 
-### Link to deployed project >>> https://6467fa0db16cbf262af30338--capable-faun-867a4b.netlify.app/
+### Link to deployed project >>> https://6467fc182631c127ff5d4490--jazzy-entremet-c7b55a.netlify.app/
