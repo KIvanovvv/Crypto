@@ -6,20 +6,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import {
-  Alert,
-  Avatar,
-  Box,
-  CircularProgress,
-  Typography,
-} from "@mui/material";
-
+import { Avatar, Box, CircularProgress, Typography } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
 import getCoins from "../../service/coinService";
 import ErrorMessage from "../ErrorMessage.jsx/ErrorMessage";
 
-export default function CryptoTable() {
+export default function CryptoTable({ refreshToggle }) {
   const [coins, setCoins] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -35,7 +28,7 @@ export default function CryptoTable() {
         setLoading(false);
       }
     })();
-  }, []);
+  }, [refreshToggle]);
 
   return (
     <>
@@ -46,7 +39,6 @@ export default function CryptoTable() {
           sx={{
             maxWidth: 850,
             maxHeight: 600,
-            minHeight: 400,
             alignSelf: "center",
           }}
         >
@@ -121,19 +113,22 @@ export default function CryptoTable() {
                   <TableCell align="right">
                     {" "}
                     <Typography variant="body1" fontWeight={"bold"}>
-                      ${Number(coin.priceUsd).toFixed(4)}
+                      $
+                      {Number(coin.priceUsd) >= 1000
+                        ? Number(coin.priceUsd).toLocaleString("en-US")
+                        : Number(coin.priceUsd).toFixed(6)}
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
                     {" "}
                     <Typography variant="body1" fontWeight={"bold"}>
-                      ${Number(coin.marketCapUsd).toFixed(2)}
+                      ${Number(coin.marketCapUsd).toLocaleString("en-US")}
                     </Typography>
                   </TableCell>
                   <TableCell align="right">
                     {" "}
                     <Typography variant="body1" fontWeight={"bold"}>
-                      ${Number(coin.volumeUsd24Hr).toFixed(2)}
+                      ${Number(coin.volumeUsd24Hr).toLocaleString("en-US")}
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -148,6 +143,7 @@ export default function CryptoTable() {
             display: "flex",
             alignContent: "center",
             justifyContent: "center",
+            height: "600px",
           }}
         >
           <CircularProgress size={400} disableShrink />
