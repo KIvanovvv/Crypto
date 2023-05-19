@@ -1,8 +1,13 @@
-import logo from "./logo.svg";
+import { Stack } from "@mui/material";
 import "./App.css";
+import CryptoTable from "./components/CryptoTable/CryptoTable";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <Stack sx={{ height: "100vh" }} justifyContent={"center"}>
+      <CryptoTable />
+    </Stack>
+  );
 }
 
 export default App;
